@@ -5,7 +5,8 @@ var lock = false;
 var tries = 0;
 let rightAns = 0;
 let totalMoves = 20;
-let time = 30;
+let time = 45;
+let gameWon = false;
 
 cards.forEach((card) => card.addEventListener("click", flip));
 
@@ -29,6 +30,11 @@ function check() {
   tries++;
 
   updateScoreBoard();
+  if (rightAns === 8) {
+    gameWon = true;
+    showResult();
+  }
+
   if (tries >= totalMoves) {
     showResult();
   }
@@ -58,7 +64,14 @@ function reset() {
 function showResult() {
   clearInterval(timerFunction);
   cards.forEach((card) => card.removeEventListener("click", flip));
-  alert("GAME OVER");
+  document.getElementById("time-result").innerHTML = "time's up";
+  document.getElementById("final-result-card").classList.remove("no-display");
+  document
+    .getElementById("final-result-card")
+    .classList.add(gameWon ? "winner-card" : "loser-card");
+  document.getElementById("final-result").innerHTML = gameWon
+    ? "Game won"
+    : "Game Over!";
 }
 
 function updateScoreBoard() {
@@ -78,7 +91,7 @@ function timer() {
     showResult();
     return;
   }
-  document.getElementById("seconds").innerHTML = time;
+  document.getElementById("seconds-value").innerHTML = time;
 }
 
 const timerFunction = setInterval(timer, 1000);

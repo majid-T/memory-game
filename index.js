@@ -4,10 +4,12 @@ var firstCard, secondCard;
 var lock = false;
 
 console.log("app started");
-console.log(cards);
 
-const flip = () => {
-  console.log("clicked");
+cards.forEach((card) => card.addEventListener("click", flip));
+
+function flip() {
+  console.log(this);
+
   if (lock) return;
   if (this === firstCard) return;
   this.classList.add("flip");
@@ -19,34 +21,32 @@ const flip = () => {
 
   secondCard = this;
   check();
-};
+}
 
-cards.forEach((card) => addEventListener("click", flip));
-
-const check = () => {
+function check() {
   var isMatch = firstCard.dataset.image === secondCard.dataset.image;
   isMatch ? succes() : fail();
-};
+}
 
-const succes = () => {
+function succes() {
   firstCard.removeEventListener("click", flip);
   secondCard.removeEventListener("click", flip);
   reset();
-};
+}
 
-const fail = () => {
+function fail() {
   lock = true;
   setTimeout(() => {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
     reset();
   }, 1000);
-};
+}
 
-const reset = () => {
+function reset() {
   [isFlipped, lock] = [false, false];
   [firstCard, secondCard] = [null, null];
-};
+}
 
 (function shuffle() {
   cards.forEach((card) => {

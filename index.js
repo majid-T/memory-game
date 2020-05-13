@@ -2,14 +2,13 @@ const cards = document.querySelectorAll(".memory-card");
 var isFlipped = false;
 var firstCard, secondCard;
 var lock = false;
-
-console.log("app started");
+var tries = 0;
+let rightAns = 0;
+let totalMoves = 20;
 
 cards.forEach((card) => card.addEventListener("click", flip));
 
 function flip() {
-  console.log(this);
-
   if (lock) return;
   if (this === firstCard) return;
   this.classList.add("flip");
@@ -26,9 +25,16 @@ function flip() {
 function check() {
   var isMatch = firstCard.dataset.image === secondCard.dataset.image;
   isMatch ? succes() : fail();
+  tries++;
+
+  updateScoreBoard();
+  if (tries >= totalMoves) {
+    showResult();
+  }
 }
 
 function succes() {
+  rightAns++;
   firstCard.removeEventListener("click", flip);
   secondCard.removeEventListener("click", flip);
   reset();
@@ -46,6 +52,21 @@ function fail() {
 function reset() {
   [isFlipped, lock] = [false, false];
   [firstCard, secondCard] = [null, null];
+}
+
+function showResult() {
+  alert("GAME OVER");
+}
+
+function updateScoreBoard() {
+  console.log("Times tried", tries);
+  console.log(rightAns);
+  let triesPlace = document.getElementById("tries");
+  let rightAnsPlace = document.getElementById("rightAns");
+  let remMovePlace = document.getElementById("remMov");
+  triesPlace.innerHTML = `${tries}`;
+  rightAnsPlace.innerHTML = `${rightAns}`;
+  remMovePlace.innerText = `${totalMoves - tries}`;
 }
 
 (function shuffle() {

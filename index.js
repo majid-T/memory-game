@@ -5,6 +5,7 @@ var lock = false;
 var tries = 0;
 let rightAns = 0;
 let totalMoves = 20;
+let time = 30;
 
 cards.forEach((card) => card.addEventListener("click", flip));
 
@@ -55,6 +56,8 @@ function reset() {
 }
 
 function showResult() {
+  clearInterval(timerFunction);
+  cards.forEach((card) => card.removeEventListener("click", flip));
   alert("GAME OVER");
 }
 
@@ -68,6 +71,17 @@ function updateScoreBoard() {
   rightAnsPlace.innerHTML = `${rightAns}`;
   remMovePlace.innerText = `${totalMoves - tries}`;
 }
+
+function timer() {
+  time--;
+  if (time === -1) {
+    showResult();
+    return;
+  }
+  document.getElementById("seconds").innerHTML = time;
+}
+
+const timerFunction = setInterval(timer, 1000);
 
 (function shuffle() {
   cards.forEach((card) => {

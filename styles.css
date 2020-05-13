@@ -11,12 +11,35 @@ body {
 }
 
 .game-container {
-  width: 600px;
+  width: 80%;
   height: 600px;
-  margin: auto;
+  margin: 5%;
   display: flex;
   flex-wrap: wrap;
   perspective: 1000px;
+}
+
+.board-container {
+  width: 20%;
+  height: 200px;
+  margin: 5%;
+  display: flex;
+  flex-wrap: wrap;
+  perspective: 1000px;
+}
+
+.score-board-item {
+  width: 100%;
+  margin-right: 5%;
+  margin-top: 5%;
+  padding: 5px;
+  background: #ffffff;
+  height: 150px;
+  border-radius: 10%;
+  justify-content: center;
+  text-align: center;
+  background-color: papayawhip;
+  padding-top: 20px;
 }
 
 .memory-card {
@@ -56,13 +79,4 @@ body {
 
 .front {
   transform: rotateY(180deg);
-}
-
-#score-board {
-  margin-right: 5%;
-  margin-top: 5%;
-  padding: 5px;
-  background: #ffffff;
-  height: 10%;
-  border-radius: 10%;
 }

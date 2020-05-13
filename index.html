@@ -72,11 +72,20 @@
         <img src="media/card_back.png" alt="logo_image" class="back" />
       </div>
     </div>
-    <div id="score-board">
-      <strong>Moves:</strong><span id="tries">0</span><br />
-      <strong>Right Answears:</strong><span id="rightAns">0</span><br />
-      <strong>Remaining Moves:</strong><span id="remMov">20</span>
+    <div class="board-container">
+      <div class="score-board-item">
+        <strong>Moves:</strong><br /><span id="tries">0</span><br />
+        <strong>Right Answears:</strong><br /><span id="rightAns">0</span><br />
+        <strong>Remaining Moves:</strong><br /><span id="remMov">20</span>
+      </div>
+      <div class="score-board-item">
+        <div>
+          <p id="seconds">00</p>
+          <p>Seconds</p>
+        </div>
+      </div>
     </div>
+
     <script src="index.js"></script>
   </body>
 </html>
